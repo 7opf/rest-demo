@@ -12,7 +12,7 @@ router.get('/', function (req, res, next) {
         };
     }
 
-    Gateway.find({}, function (err, docs) {
+    Gateway.find(query, function (err, docs) {
         if (err) {
             return next(err);
         }
