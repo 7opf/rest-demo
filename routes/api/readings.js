@@ -20,17 +20,27 @@ router.get('/', function (req, res, next) {
         query.type = req.query.gateway;
     }
 
-    if (!!req.query.timestamp ) {
-        query.timestamp = {};
-        if (Array.isArray(req.query.timestamp)) {
-            query.timestamp.$gte = new Date(req.query.timestamp[0]);
-            query.timestamp.$lt = new Date(req.query.timestamp[1]);
-        } else {
-            query.timestamp.$gte = new Date(req.query.timestamp);
-        }
-    } else {
+    if (!Array.isArray(req.query.timestamp)) {
+        req.query.timestamp = !!req.query.timestamp ? [req.query.timestamp] : []
+    }
+
+    req.query.timestamp = req.query.timestamp.filter(function (item) {
+        return !!item;
+    });
+
+    if (req.query.timestamp.length === 1) {
+        var val = req.query.timestamp[0];
         query.timestamp = {
-            $gte: new Date(Date.now() - 1000 * 60 * 60 * 24)
+            $gte: isNaN(val) ? val : parseInt(val)
+        };
+    }
+
+    if (req.query.timestamp.length === 2) {
+        var val1 = req.query.timestamp[0];
+        var val2 = req.query.timestamp[1];
+        query.timestamp = {
+            $gte: isNaN(val1) ? val1 : parseInt(val1),
+            $lt: isNaN(val2) ? val2 : parseInt(val2)
         };
     }
 
