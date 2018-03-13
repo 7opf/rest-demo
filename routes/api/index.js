@@ -8,7 +8,7 @@ var apiError = require('../../middleware/api-error');
 var apiNotFound = require('../../middleware/api-not-found');
 
 router.get('/', function(req, res, next) {
-  res.redirect('https://documenter.getpostman.com/collection/view/3872201-eaa7fa05-c132-4f26-aca7-c4d66a1ed5a3#68cab93d-8b2d-400c-8b99-3dba0c9d3d0d');
+  res.redirect('https://documenter.getpostman.com/view/3872201/maws-api/RVnVGMF1');
 });
 
 router.use('/sensors', sensors);
