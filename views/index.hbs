@@ -1,0 +1,130 @@
+<h1 style="margin-bottom: 0">MAWS REST API Demo</h1>
+<small>by <a href="mailto:s.skillman@surrey.ac.uk">Severin Skillman</a></small>
+<p style="font-size: large">Please refer to the <a href="/api">API documentation</a> to start interacting with the HTTP API.</p>
+<hr>
+
+<span id="top"></span>
+<h2>Current data on the server</h2>
+<a class="pure-button" href="#subjects">Subjects</a>
+<a class="pure-button" href="#gateways">Gateways</a>
+<a class="pure-button" href="#sensors">Sensors</a>
+<a class="pure-button" href="#readings">Readings</a>
+<br><br>
+
+<span id="subjects"></span>
+<h3>Subjects</h3>
+<table class="pure-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Created</th>
+            <th>Updated</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each subjects}}
+            <tr id="subject{{id}}">
+                <td>{{id}}</td>
+                <td>{{name}}</td>
+                <td>{{type}}</td>
+                <td>{{fn createdAt 'toISOString'}}</td>
+                <td>{{fn updatedAt 'toISOString'}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<br><a href="#top">Back to top</a><br><br>
+
+<span id="gateways"></span>
+<h3>Gateways</h3>
+<table class="pure-table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Created</th>
+        <th>Updated</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#each gateways}}
+        <tr id="gateway{{id}}">
+            <td>{{id}}</td>
+            <td>{{name}}</td>
+            <td>{{location}}</td>
+            <td>{{fn createdAt 'toISOString'}}</td>
+            <td>{{fn updatedAt 'toISOString'}}</td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
+
+<br><a href="#top">Back to top</a><br><br>
+
+<span id="sensors"></span>
+<h3>Sensors</h3>
+<table class="pure-table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Subject</th>
+        <th>Created</th>
+        <th>Updated</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#each sensors}}
+        <tr id="sensor{{id}}">
+            <td>{{id}}</td>
+            <td>{{name}}</td>
+            <td>{{type}}</td>
+            <td><a href="#subject{{subject}}">{{subject}}</a></td>
+            <td>{{fn createdAt 'toISOString'}}</td>
+            <td>{{fn updatedAt 'toISOString'}}</td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
+
+<br><a href="#top">Back to top</a><br><br>
+
+<span id="readings"></span>
+<h3>Readings</h3>
+<table class="pure-table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Sensor</th>
+        <th>Gateway</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Unit</th>
+        <th>Timestamp</th>
+        <th>Created</th>
+        <th>Updated</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#each readings}}
+        <tr id="reading{{id}}">
+            <td>{{id}}</td>
+            <td><a href="#sensor{{sensor}}">{{sensor}}</a></td>
+            <td><a href="#gateway{{gateway}}">{{gateway}}</a></td>
+            <td>{{type}}</td>
+            <td>{{value}}</td>
+            <td>{{unit}}</td>
+            <td>{{fn timestamp 'toISOString'}}</td>
+            <td>{{fn createdAt 'toISOString'}}</td>
+            <td>{{fn updatedAt 'toISOString'}}</td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
+
+<br><a href="#top">Back to top</a><br><br>
