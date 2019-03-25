@@ -3,6 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Sensor = mongoose.model('Sensor');
 var wrapResult = require('../../util/wrap-result');
+var apiNotFound = require('../../middleware/api-not-found');
 
 router.get('/', function (req, res, next) {
     var query = {};
@@ -69,5 +70,7 @@ router.put('/:id', function (req, res, next) {
         });
     });
 });
+
+router.use(apiNotFound);
 
 module.exports = router;
