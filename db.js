@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var conf = require('./config');
 var track = require('mongoose-trackable');
 
-mongoose.connect(conf.mongo.uri);
+mongoose.connect(conf.mongo.uri, {useMongoClient: true});
 mongoose.Promise = global.Promise;
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
