@@ -3,7 +3,6 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Reading = mongoose.model('Reading');
 var wrapResult = require('../../util/wrap-result');
-var apiNotFound = require('../../middleware/api-not-found');
 
 router.get('/', function (req, res, next) {
     var query = {};
@@ -72,13 +71,13 @@ router.get('/:id', function (req, res, next) {
         }
 
         if (!doc) {
-            return next();
+            err = new Error('Reading with ID=' + req.params.id + ' does not exist.');
+            err.name = 'ResourceNotFoundError';
+            return next(err);
         }
 
         res.json(wrapResult(doc));
     });
 });
-
-router.use(apiNotFound);
 
 module.exports = router;

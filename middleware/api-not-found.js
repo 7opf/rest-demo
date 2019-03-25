@@ -1,6 +1,5 @@
 module.exports = function (req, res, next) {
-    var msg = !!req.params.id ? 'Resource with ID=' + req.params.id : 'Endpoint ' + req.path;
-    var notFoundError = new Error(msg + ' does not exist.');
-    notFoundError.name = 'NotFoundError';
+    var notFoundError = new Error('Endpoint ' + req.path + ' does not exist.');
+    notFoundError.name = 'EndpointNotFoundError';
     next(notFoundError);
 };

@@ -7,7 +7,11 @@ module.exports = function (err, req, res, next) {
                 return err.errors[key].message;
             });
             break;
-        case 'NotFoundError':
+        case 'EndpointNotFoundError':
+            res.status(404);
+            errors.push(err.message);
+            break;
+        case 'ResourceNotFoundError':
             res.status(404);
             errors.push(err.message);
             break;

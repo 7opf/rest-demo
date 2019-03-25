@@ -3,7 +3,6 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Sensor = mongoose.model('Sensor');
 var wrapResult = require('../../util/wrap-result');
-var apiNotFound = require('../../middleware/api-not-found');
 
 router.get('/', function (req, res, next) {
     var query = {};
@@ -43,7 +42,9 @@ router.get('/:id', function (req, res, next) {
         }
 
         if (!doc) {
-            return next();
+            err = new Error('Sensor with ID=' + req.params.id + ' does not exist.');
+            err.name = 'ResourceNotFoundError';
+            return next(err);
         }
 
         res.json(wrapResult(doc));
@@ -57,7 +58,9 @@ router.put('/:id', function (req, res, next) {
         }
 
         if (!doc) {
-            return next();
+            err = new Error('Sensor with ID=' + req.params.id + ' does not exist.');
+            err.name = 'ResourceNotFoundError';
+            return next(err);
         }
 
         doc.set(req.body);
@@ -70,7 +73,5 @@ router.put('/:id', function (req, res, next) {
         });
     });
 });
-
-router.use(apiNotFound);
 
 module.exports = router;
