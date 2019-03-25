@@ -7,7 +7,7 @@ var wrapResult = require('../../util/wrap-result');
 router.get('/', function (req, res, next) {
     var query = {};
     if (!!req.query.location) {
-        query.type = {
+        query.location = {
             $regex: new RegExp(req.query.location, 'i')
         };
     }

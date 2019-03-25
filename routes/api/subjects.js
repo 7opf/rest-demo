@@ -2,8 +2,6 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Subject = mongoose.model('Subject');
-var Reading = mongoose.model('Reading');
-var Sensor = mongoose.model('Sensor');
 var wrapResult = require('../../util/wrap-result');
 
 router.get('/', function (req, res, next) {

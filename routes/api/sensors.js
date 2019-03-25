@@ -13,7 +13,7 @@ router.get('/', function (req, res, next) {
     }
 
     if (!!req.query.subject) {
-        query.type = req.query.subject;
+        query.subject = req.query.subject;
     }
 
     Sensor.find(query, function (err, docs) {
