@@ -7,14 +7,21 @@ var Gateway = new Schema({
         validate: {
             isAsync: true,
             validator: function (v, cb) {
-                if (!this.isNew) {
-                    // only validate for new docs
-                    return cb(true);
-                }
+                var self = this;
                 var Model = mongoose.model('Gateway');
                 Model.findOne({id: v}, function (err, doc) {
-                    return doc === null ? cb(true) : cb(false);
-                })
+                    if (err) {
+                        return cb(false, 'Database error');
+                    }
+
+                    // if id doesn't exist we can create it
+                    if (!doc) {
+                        return cb(true);
+                    }
+
+                    // may change own id only if it doesn't already exist
+                    return doc.get('_id').equals(self.get('_id')) ? cb(true) : cb(false);
+                });
             },
             message: 'Gateway ID already exists.'
         },
