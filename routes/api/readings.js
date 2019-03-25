@@ -13,11 +13,11 @@ router.get('/', function (req, res, next) {
     }
 
     if (!!req.query.sensor) {
-        query.type = req.query.sensor;
+        query.sensor = req.query.sensor;
     }
 
     if (!!req.query.gateway) {
-        query.type = req.query.gateway;
+        query.gateway = req.query.gateway;
     }
 
     if (!Array.isArray(req.query.timestamp)) {
