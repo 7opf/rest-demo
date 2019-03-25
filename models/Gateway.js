@@ -7,6 +7,10 @@ var Gateway = new Schema({
         validate: {
             isAsync: true,
             validator: function (v, cb) {
+                if (!this.isNew) {
+                    // only validate for new docs
+                    return cb(true);
+                }
                 var Model = mongoose.model('Gateway');
                 Model.findOne({id: v}, function (err, doc) {
                     return doc === null ? cb(true) : cb(false);
