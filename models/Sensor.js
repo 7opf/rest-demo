@@ -8,7 +8,7 @@ var Sensor = new Schema({
             isAsync: true,
             validator: function (v, cb) {
                 var self = this;
-                var Model = mongoose.model('Gateway');
+                var Model = mongoose.model('Sensor');
                 Model.findOne({id: v}, function (err, doc) {
                     if (err) {
                         return cb(false, 'Database error');
